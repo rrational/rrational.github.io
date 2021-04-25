@@ -451,22 +451,10 @@ $(document).ready(function () {
     });
 
     // Scroll input into focus when clicked. (Fix for cell phones)
-    $('input').focus( function() {
-        var $input = $(this);
-        var scroll = $input.offset();
-        $input.closest('#viewport').animate({ scrollTop: $input.offset().top }, 'slow');
-    });
-
-    /*
-    $(document).on('focus', 'input', function() {
-        document.querySelector('input').scrollIntoView();
-    });
-    */
-
-    $('body').on('focusin', 'input, textarea', function(event) {
-        if(navigator.userAgent.indexOf('Android') > -1){
+    $('body').on('focusin', 'input, textarea', function() {
+        if(navigator.userAgent.indexOf('Android') > -1) {
             var scroll = $(this).offset();
-            window.scrollTo(0, scroll);
+            window.scrollTo(0, scroll.top);
         }
     });
 });
