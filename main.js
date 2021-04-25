@@ -453,7 +453,15 @@ $(document).ready(function () {
     // Scroll input into focus when clicked. (Fix for cell phones)
     $('body').on('focus', 'input, textarea', function() {
         if(navigator.userAgent.indexOf('Android') > -1) {
-            $(this)[0].scrollIntoView({block: "center"});
+            console.log($(this).closest('.field-row'));
+            $(this).closest('.field-row')[0].scrollIntoView({block: "start"});
         }
     });
 });
+
+// Add a whole bunch of whitespace at the bottom of the page for android
+if(navigator.userAgent.indexOf('Android') > -1) {
+    for (var i=0; i<5; i++) {
+        $('body').append('<div class="container overflow-hidden py-5"><div class="row gy-5"><div class="col"><p class="text-muted"></p></div></div></div>');
+    }
+}
