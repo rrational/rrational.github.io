@@ -397,7 +397,7 @@ $(document).ready(function () {
     // Calls necessary initialization functions once page has loaded
     initializePage();
 
-    // Set up click event listeners for buttons on page
+    // Copy button click event
     $('#copy-button').click(function() {
         let copyText = $('#reportNotes').text();
         var originalTitle = $('#copy-button').attr('data-bs-original-title');
@@ -407,12 +407,14 @@ $(document).ready(function () {
         $('#copy-button').attr('data-bs-original-title', originalTitle);
     });
 
+    // Report button click event
     $('#report-button').click(function() {
         var myModal = new bootstrap.Modal($('#reportModal').get(0), {});
         $('#reportNotes').text(generateReport());
         myModal.show();
     });
 
+    // Clear button click event
     $('#clear-button').click(function() {
         if (confirm("Are you sure you want to delete ALL components and start fresh?")) {
             clearComponents();
@@ -420,25 +422,26 @@ $(document).ready(function () {
         }
     });
 
+    // Add button click event
     $('#add-button').click(function() {
         components.push(newComponent());
         activeIndex = components.length-1;
         updateComponents();
     });
 
+    // Delete button click event
     $('#delete-button').click(function() {
         if(confirm("Are you sure you want to delete the current component?")) {
             components.splice(activeIndex, 1);
             activeIndex -= 1;
-
             if(activeIndex < 0 || activeIndex > components.length-1) {
                 activeIndex = components.length-1;
             }
-
             updateComponents();
         }
     });
 
+    // data-tab click event ("Info", "Electrical", "Refrigerant", etc..)
     $('.data-tab').click(function() {
         components[activeIndex].activeTab = $(this).attr('id');
         updateComponents();
@@ -452,7 +455,7 @@ $(document).ready(function () {
 
     // Scroll input into focus when clicked or when keyboard pops up. (Fix for firefox on android)
     if(navigator.userAgent.indexOf('Android') > -1) {
-        // Center selected input or textarea if screen is resize
+        // Center selected input or textarea if screen is resized
         // Note: This can be slightly annoying if you have a input selected and scroll up causing
         // the navigation bar to hide, which is technically a resize, which will scroll back to the
         // input. User has to deselect the input box to scroll up if the navigation bar is present
@@ -472,7 +475,7 @@ $(document).ready(function () {
     }
 });
 
-// Add a whole bunch of whitespace at the bottom of the page for android
+// Add a whole bunch of whitespace at the bottom of the page for android.
 if(navigator.userAgent.indexOf('Android') > -1) {
     for (var i=0; i<5; i++) {
         $('body').append('<div style="height: 15vh;"></div>');
