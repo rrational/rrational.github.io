@@ -452,6 +452,15 @@ $(document).ready(function () {
 
     // Scroll input into focus when clicked. (Fix for cell phones)
     if(navigator.userAgent.indexOf('Android') > -1) {
+
+        window.addEventListener("resize", function() {
+            if(document.activeElement.tagName=="INPUT"){
+                window.setTimeout(function(){
+                    document.activeElement.scrollIntoView({block: "center"});
+                },0);
+            }
+        });
+        /*
         $('body').on('focus', 'input, textarea', function() {
             //$(this).closest('.field-row')[0].scrollIntoView({block: "start"});
             let el = $(this)[0];
@@ -460,6 +469,7 @@ $(document).ready(function () {
             }, 10);
             
         });
+        */
     }
     /*
     // Using event listener on resize might be a better solution
