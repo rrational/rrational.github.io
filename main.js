@@ -457,19 +457,19 @@ $(document).ready(function () {
             if(document.activeElement.tagName=="INPUT"){
                 window.setTimeout(function(){
                     document.activeElement.scrollIntoView({block: "center"});
-                }, 100);
+                }, 1000);
             }
         });
-        /*
+        
         $('body').on('focus', 'input, textarea', function() {
             //$(this).closest('.field-row')[0].scrollIntoView({block: "start"});
             let el = $(this)[0];
             window.setTimeout(function(){
                 el.scrollIntoView({block: "center"});
-            }, 10);
+            }, 1000);
             
         });
-        */
+        
     }
     /*
     // Using event listener on resize might be a better solution
