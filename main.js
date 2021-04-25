@@ -454,7 +454,7 @@ $(document).ready(function () {
     if(navigator.userAgent.indexOf('Android') > -1) {
 
         window.addEventListener("resize", function() {
-            if(document.activeElement.tagName=="INPUT"){
+            if(document.activeElement.tagName == "INPUT" || document.activeElement.tagName == "TEXTAREA"){
                 window.setTimeout(function(){
                     document.activeElement.scrollIntoView({block: "center"});
                 }, 0);
@@ -471,20 +471,6 @@ $(document).ready(function () {
         });
         
     }
-    /*
-    // Using event listener on resize might be a better solution
-    // Also, setTimeout is a good idea to scrollIntoView AFTER keyboard shows up
-    // Then I could maybe use {block: "center"} instead of start
-    if(/Android 4\.[0-3]/.test(navigator.appVersion)){
-        window.addEventListener("resize", function() {
-            if(document.activeElement.tagName=="INPUT"){
-                window.setTimeout(function(){
-                    document.activeElement.scrollIntoViewIfNeeded();
-                },0);
-            }
-        })
-    }
-    */
 });
 
 // Add a whole bunch of whitespace at the bottom of the page for android
