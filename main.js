@@ -309,7 +309,7 @@ function drawComponents() {
         }
 
         var componentTitle = componentType;
-        componentTitle += component.sn ? " " + component.sn.trim().substr(-4) : "";
+        componentTitle += component.sn ? " #" + component.sn.trim().substr(-4) : "";
 
         $('#componentsTab').append('<li class="nav-item"><button class="' + classVal + '">' + componentTitle + '</button></li>');
 
