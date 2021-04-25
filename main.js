@@ -1,8 +1,42 @@
+/**
+ * Prefix for each field line under a component in the report.
+ */
+let REPORT_FIELD_PREFIX = " • ";
+
+/**
+ * Constants for units of measurement used in fields.
+ */
+let UNITS_PLUS_MINUS = "±";
+let UNITS_MICROFARADS = "µF";
+let UNITS_DEGREES = "°F";
+let UNITS_AMPS = "a";
+let UNITS_VOLTS = "v";
+let UNITS_MICROAMPS = "µa";
+let UNITS_PSIG = "PSIG";
+let UNITS_INCHES_WATERCOLUMN = "\" WC";
+
+
+/**
+ * Browsers localStorage used to store components data and activeIndex.
+ */
 var storage = window.localStorage;
+
+/**
+ * Array of objects used to store information about Condensors,
+ * Furnaces, FAUs and coils of systems.
+ */
 var components = [];
 
+/**
+ * Index of component in components array that is currently
+ * being displayed. This is stored so that refreshing the page keeps the
+ * user on the same component.
+ */
 var activeIndex = 0;
 
+/**
+ * Default data for a component when new-button is clicked. 
+ */
 function newComponent() {
     return {
         'type': 'New',
@@ -10,26 +44,26 @@ function newComponent() {
     };
 }
 
+/**
+ * Formats data for a single field for report.
+ */
 function reportField(label, field, units="", newline=true) {
     if (!field) {
         return "";
     }
-    if (!units) {
-        units = "";
-    }
-    let reportText = " • " + label + ": " + field + units;
+    let reportText = REPORT_FIELD_PREFIX + label + ": " + field + units;
     if (newline) {
         return reportText + "\n";
     }
     return reportText;
 }
 
+/**
+ * Formats data for a field that has a rated field for a report.
+ */
 function reportFieldRated(label, field, rated, units="", newline=true) {
     if (!field) {
         return "";
-    }
-    if (!units) {
-        units = "";
     }
     var reportText = reportField(label, field, units, false);
     if (rated) {
@@ -41,13 +75,16 @@ function reportFieldRated(label, field, rated, units="", newline=true) {
     return reportText;
 }
 
+/**
+ * Formats data for the fields associated with a capacitor for a report.
+ */
 function reportCapacitor(label, field, rated, plusMinus, newline=true) {
     if (!field) {
         return "";
     }
-    var reportText = reportFieldRated(label + " Cap", field, rated, "µF", false);
+    var reportText = reportFieldRated(label + " Cap", field, rated, UNITS_MICROFARADS, false);
     if (rated && plusMinus) {
-        reportText += " ±" + plusMinus + "%";
+        reportText += " " + UNITS_PLUS_MINUS + plusMinus + "%";
     }
     if (newline) {
         reportText += "\n";
@@ -55,16 +92,19 @@ function reportCapacitor(label, field, rated, plusMinus, newline=true) {
     return reportText;
 }
 
+/**
+ * Formats data for the fields associated with refrigerant readings for a report.
+ */
 function reportRefrigerant(label, field, target, pressure, newline=true) {
     if (!field) {
         return "";
     }
-    var reportText = " • " + label + ": " + field + "°F";
+    var reportText = REPORT_FIELD_PREFIX + label + ": " + field + UNITS_DEGREES;
     if (pressure) {
-        reportText += " @ " + pressure + " PSIG";
+        reportText += " @ " + pressure + UNITS_PSIG;
     }
     if (target) {
-        reportText += " (target " + label + " " + target + "°F)";
+        reportText += " (target " + label + " " + target + UNITS_DEGREES + ")";
     }
     if (newline) {
         reportText += "\n";
@@ -72,20 +112,23 @@ function reportRefrigerant(label, field, target, pressure, newline=true) {
     return reportText;
 }
 
+/**
+ * Helper to generate text related to a Condensor component.
+ */
 function generateCondensorReport(component) {
     var reportText = "";
 
     // ELECTRICAL
-    reportText += reportFieldRated("FLA", component.fla, component.flaRated, "a");
-    reportText += reportFieldRated("RLA", component.rla, component.rlaRated, "a");
-    reportText += reportFieldRated("LRA", component.lra, component.lraRated, "a");
+    reportText += reportFieldRated("FLA", component.fla, component.flaRated, UNITS_AMPS);
+    reportText += reportFieldRated("RLA", component.rla, component.rlaRated, UNITS_AMPS);
+    reportText += reportFieldRated("LRA", component.lra, component.lraRated, UNITS_AMPS);
     reportText += reportField("Electrical Notes", component.electricalNotes);
     // REFRIGERANT
     reportText += reportField("Metering Device", component.meteringDevice);
     reportText += reportRefrigerant("sh", component.sh, component.shRated, component.suctionPSIG);
     reportText += reportRefrigerant("sc", component.sc, component.scRated, component.liquidPSIG);
-    reportText += reportField("ODDB", component.oddb, "°F");
-    reportText += reportField("IDWB", component.idwb, "°F");
+    reportText += reportField("ODDB", component.oddb, UNITS_DEGREES);
+    reportText += reportField("IDWB", component.idwb, UNITS_DEGREES);
     reportText += reportField("Refrigerant Notes", component.refrigerantNotes);
     // CAPACITOR
     reportText += reportCapacitor("Fan", component.fanCap, component.fanCapRated, component.fanCapPM);
@@ -95,17 +138,20 @@ function generateCondensorReport(component) {
     return reportText;
 }
 
+/**
+ * Helper to generate text related to a Furnace component.
+ */
 function generateFurnaceReport(component) {
     var reportText = "";
 
     // ELECTRICAL
-    reportText += reportFieldRated("FLA", component.fla, component.flaRated, "a");
-    reportText += reportFieldRated("Inducer", component.inducer, component.inducerRated, "a");
-    reportText += reportFieldRated("Flame Sensor ", component.flameSensor, component.flameSensorRated, "µa");
+    reportText += reportFieldRated("FLA", component.fla, component.flaRated, UNITS_AMPS);
+    reportText += reportFieldRated("Inducer", component.inducer, component.inducerRated, UNITS_AMPS);
+    reportText += reportFieldRated("Flame Sensor ", component.flameSensor, component.flameSensorRated, UNITS_MICROAMPS);
     reportText += reportField("Electrical Notes", component.electricalNotes);
     // Airflow
-    reportText += reportField("ΔT", component.tempSplit, "°F");
-    reportText += reportField("ESP", component.esp, "\" WC");
+    reportText += reportField("ΔT", component.tempSplit, UNITS_DEGREES);
+    reportText += reportField("ESP", component.esp, UNITS_INCHES_WATERCOLUMN);
     reportText += reportField("Airflow Notes", component.airflowNotes);
     // CAPACITOR
     reportText += reportCapacitor("Blower", component.blowerCap, component.blowerCapRated, component.blowerCapPM);
@@ -115,15 +161,18 @@ function generateFurnaceReport(component) {
     return reportText;
 }
 
+/**
+ * Helper to generate text related to a FAU component.
+ */
 function generateFAUReport(component) {
     var reportText = "";
 
     // ELECTRICAL
-    reportText += reportFieldRated("FLA", component.fla, component.flaRated, "a");
+    reportText += reportFieldRated("FLA", component.fla, component.flaRated, UNITS_AMPS);
     reportText += reportField("Electrical Notes", component.electricalNotes);
     // Airflow
-    reportText += reportField("ΔT", component.tempSplit, "°F");
-    reportText += reportField("ESP", component.esp, "\" WC");
+    reportText += reportField("ΔT", component.tempSplit, UNITS_DEGREES);
+    reportText += reportField("ESP", component.esp, UNITS_INCHES_WATERCOLUMN);
     reportText += reportField("Airflow Notes", component.airflowNotes);
     // CAPACITOR
     reportText += reportCapacitor("Blower", component.blowerCap, component.blowerCapRated, component.blowerCapPM);
@@ -132,6 +181,10 @@ function generateFAUReport(component) {
     return reportText;
 }
 
+/**
+ * Creates the text for a report that is generated once all components have
+ * been added and all of the data has been entered into the forms.
+ */
 function generateReport() {
     reportText = "";
     for (let component of components) {
@@ -165,6 +218,11 @@ function generateReport() {
     return reportText;
 }
 
+/**
+ * Reads all of the inputs in form and sets component's object values to
+ * what the form values are. The ids of the inputs in the form are what the
+ * name of the property is in the component object.
+ */
 function setFields(component) {
     $('.model-val').each(function(i, obj) {
         var field = $(obj).attr('id');
@@ -172,6 +230,11 @@ function setFields(component) {
     });
 }
 
+/**
+ * Hides and disables fields and tabs that are not relevant to the current
+ * component selected. Also shows the previously active tab for the component
+ * that is currently selected, in case the component was just selected.
+ */
 function showForm(id) {
     var component = components[id];
 
@@ -199,7 +262,6 @@ function showForm(id) {
     $('#inducerRow').addClass('invisible').hide();
     $('#inducerCapRow').addClass('invisible').hide();
 
-
     setFields(component);
 
     if (component.type == 'Condensor') {
@@ -226,9 +288,15 @@ function showForm(id) {
     }
 }
 
+/**
+ * Completely clears then remakes the ul that holds components from the
+ * components array. Also calls for the form data to be redrawn so that
+ * only appropriate fields for the component are being displayed. Sets up
+ * the click event listener for components li.
+ */
 function drawComponents() {
     $('#componentsTab').empty();
-    for (var id in components) {
+    for (let id in components) {
         var component = components[id];
         var classVal = 'nav-link';
         if (id == activeIndex) {
@@ -250,16 +318,25 @@ function drawComponents() {
     });
 }
 
+/**
+ * Stores activeIndex in localStorage
+ */
 function updateActiveIndex() {
     storage.setItem('activeIndex', activeIndex);
 }
 
+/**
+ * Converts components array to JSON then stores it in localStorage.
+ */
 function updateComponents() {
     storage.setItem('components', JSON.stringify(components));
     updateActiveIndex();
     drawComponents();
 }
 
+/**
+ * Attempts to clear localStorage
+ */
 function clearLocalStorage() {
     try {
         storage.clear();
@@ -268,12 +345,19 @@ function clearLocalStorage() {
     }
 }
 
+/**
+ * Clears components, activeIndex and localStorage. Resets page to as if
+ * this is the first time the user has been on the page.
+ */
 function clearComponents() {
     clearLocalStorage();
     components = [];
     activeIndex = -1;
 }
 
+/**
+ * Attempts to load components and activeIndex variables from localStorage.
+ */
 function loadLocalStorage() {
     try {
         components = storage.getItem('components');
@@ -290,24 +374,36 @@ function loadLocalStorage() {
         if (activeIndex == null) {
             activeIndex = components.length-1;
         }
-        console.log(activeIndex);
     } catch (error) {
         console.error(error);
         activeIndex = components.length-1;
     }
 }
 
-$(document).ready(function () {
-
+/**
+ * Initializes everything for page after document has loaded and is ready.
+ */
+function initializePage() {
+    $('[data-toggle="tooltip"]').tooltip()
     loadLocalStorage();
     drawComponents();
+}
 
+/**
+ * Waits for the page to fully loads, then initializes this app and sets up
+ * click listeners for buttons.
+ */
+$(document).ready(function () {
+    // Calls necessary initialization functions once page has loaded
+    initializePage();
+
+    // Set up click event listeners for buttons on page
     $('#copy-button').click(function() {
         let copyText = $('#reportNotes').text();
-        console.log(copyText);
         var originalTitle = $('#copy-button').attr('data-bs-original-title');
         var success = navigator.clipboard.writeText(copyText);
-        $('#copy-button').attr('data-bs-original-title', success ? "Copied!" : "Failed to copy.").tooltip('show');
+        let updatedTitle = success ? "Copied!" : "Failed to copy.";
+        $('#copy-button').attr('data-bs-original-title', updatedTitle).tooltip('show');
         $('#copy-button').attr('data-bs-original-title', originalTitle);
     });
 
@@ -343,17 +439,14 @@ $(document).ready(function () {
         }
     });
 
-    $('.model-val').change(function() {
-        components[activeIndex][$(this).attr('id')] = this.value;
-        updateComponents();
-    });
-
     $('.data-tab').click(function() {
         components[activeIndex].activeTab = $(this).attr('id');
         updateComponents();
     });
 
-});
-$(function () {
-  $('[data-toggle="tooltip"]').tooltip()
+    // Set up event listener to update components when form data changes
+    $('.model-val').change(function() {
+        components[activeIndex][$(this).attr('id')] = this.value;
+        updateComponents();
+    });
 });
