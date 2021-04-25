@@ -450,18 +450,25 @@ $(document).ready(function () {
         updateComponents();
     });
 
-    // Scroll input into focus when clicked or when keyboard pops up. (Fix for cell phones)
+    // Scroll input into focus when clicked or when keyboard pops up. (Fix for firefox on android)
     if(navigator.userAgent.indexOf('Android') > -1) {
+        // Center selected input or textarea if screen is resize
+        // Note: This can be slightly annoying if you have a input selected and scroll up causing
+        // the navigation bar to hide, which is technically a resize, which will scroll back to the
+        // input. User has to deselect the input box to scroll up if the navigation bar is present
+        // or scroll up when the naviation bar isn't present.
         window.addEventListener("resize", function() {
-            if(document.activeElement.tagName == "INPUT" || document.activeElement.tagName == "TEXTAREA"){
+            let tagName = document.activeElement.tagName
+            if(tagName == "INPUT" || tagName == "TEXTAREA") {
                 document.activeElement.scrollIntoView({block: "center"});
             }
         });
+        // Center selected input when it is clicked. Probably not needed, but it replicates what
+        // safari on iPhone does.
         $('body').on('focus', 'input, textarea', function() {
             //$(this).closest('.field-row')[0].scrollIntoView({block: "start"});
             $(this)[0].scrollIntoView({block: "center"});
         });
-        
     }
 });
 
