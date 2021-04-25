@@ -449,4 +449,13 @@ $(document).ready(function () {
         components[activeIndex][$(this).attr('id')] = this.value;
         updateComponents();
     });
+
+    // Scroll input into focus when clicked. (Fix for cell phones)
+    $('input').focus( function() {
+        var $input = $(this);
+        var scroll = $input.offset();
+        $input.closest('#viewport').animate({
+          scrollTop: $input.offset().top
+        }, 'slow');
+    });
 });
