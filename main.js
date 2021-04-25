@@ -457,7 +457,7 @@ $(document).ready(function () {
             if(document.activeElement.tagName=="INPUT"){
                 window.setTimeout(function(){
                     document.activeElement.scrollIntoView({block: "center"});
-                },0);
+                }, 100);
             }
         });
         /*
