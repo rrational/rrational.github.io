@@ -457,7 +457,7 @@ $(document).ready(function () {
             let el = $(this)[0];
             window.setTimeout(function(){
                 el.scrollIntoView({block: "center"});
-            },0);
+            }, 10);
             
         });
     }
