@@ -450,24 +450,16 @@ $(document).ready(function () {
         updateComponents();
     });
 
-    // Scroll input into focus when clicked. (Fix for cell phones)
+    // Scroll input into focus when clicked or when keyboard pops up. (Fix for cell phones)
     if(navigator.userAgent.indexOf('Android') > -1) {
-
         window.addEventListener("resize", function() {
             if(document.activeElement.tagName == "INPUT" || document.activeElement.tagName == "TEXTAREA"){
-                window.setTimeout(function(){
-                    document.activeElement.scrollIntoView({block: "center"});
-                }, 0);
+                document.activeElement.scrollIntoView({block: "center"});
             }
         });
-        
         $('body').on('focus', 'input, textarea', function() {
             //$(this).closest('.field-row')[0].scrollIntoView({block: "start"});
-            let el = $(this)[0];
-            window.setTimeout(function(){
-                el.scrollIntoView({block: "center"});
-            }, 100);
-            
+            $(this)[0].scrollIntoView({block: "center"});
         });
         
     }
