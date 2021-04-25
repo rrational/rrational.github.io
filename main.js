@@ -461,6 +461,6 @@ $(document).ready(function () {
 // Add a whole bunch of whitespace at the bottom of the page for android
 if(navigator.userAgent.indexOf('Android') > -1) {
     for (var i=0; i<5; i++) {
-        $('body').append('<div class="container overflow-hidden py-5"><div class="row gy-5"><div class="col"><p class="text-muted"></p></div></div></div>');
+        $('body').append('<div style="height: 15vh;"></div>');
     }
 }
