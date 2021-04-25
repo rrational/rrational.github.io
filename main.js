@@ -39,7 +39,7 @@ var activeIndex = 0;
  */
 function newComponent() {
     return {
-        'type': 'New',
+        'type': '',
         'activeTab': 'info-tab'
     };
 }
@@ -192,7 +192,7 @@ function generateReport() {
             continue;
         }
         reportText += component.type;
-        reportText += component.sn ? " SN " + component.sn : "";
+        reportText += component.sn ? " S/N " + component.sn : "";
         reportText += "\n";
 
         reportText += reportField("Model", component.model);
@@ -303,8 +303,13 @@ function drawComponents() {
             classVal += ' active'
         }
 
-        var componentTitle = component.type ? component.type : "New";
-        componentTitle += component.sn ? " SN " + component.sn : "";
+        var componentType = component.type ? component.type.trim() : "New";
+        if (componentType.length > 4) {
+            componentType = componentType.substr(0, 4) + ".";
+        }
+
+        var componentTitle = componentType;
+        componentTitle += component.sn ? " " + component.sn.trim().substr(-4) : "";
 
         $('#componentsTab').append('<li class="nav-item"><button class="' + classVal + '">' + componentTitle + '</button></li>');
 
