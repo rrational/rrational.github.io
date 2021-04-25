@@ -453,7 +453,6 @@ $(document).ready(function () {
     // Scroll input into focus when clicked. (Fix for cell phones)
     $('body').on('focus', 'input, textarea', function() {
         if(navigator.userAgent.indexOf('Android') > -1) {
-            console.log($(this).closest('.field-row'));
             $(this).closest('.field-row')[0].scrollIntoView({block: "start"});
         }
     });
