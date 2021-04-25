@@ -87,7 +87,6 @@ function generateCondensorReport(component) {
     reportText += reportField("ODDB", component.oddb, "°F");
     reportText += reportField("IDWB", component.idwb, "°F");
     reportText += reportField("Refrigerant Notes", component.refrigerantNotes);
-
     // CAPACITOR
     reportText += reportCapacitor("Fan", component.fanCap, component.fanCapRated, component.fanCapPM);
     reportText += reportCapacitor("Herm", component.hermCap, component.hermCapRated, component.hermCapPM);
@@ -108,7 +107,6 @@ function generateFurnaceReport(component) {
     reportText += reportField("ΔT", component.tempSplit, "°F");
     reportText += reportField("ESP", component.esp, "\" WC");
     reportText += reportField("Airflow Notes", component.airflowNotes);
-
     // CAPACITOR
     reportText += reportCapacitor("Blower", component.blowerCap, component.blowerCapRated, component.blowerCapPM);
     reportText += reportCapacitor("Inducer", component.inducerCap, component.inducerCapRated, component.inducerCapPM);
@@ -127,7 +125,6 @@ function generateFAUReport(component) {
     reportText += reportField("ΔT", component.tempSplit, "°F");
     reportText += reportField("ESP", component.esp, "\" WC");
     reportText += reportField("Airflow Notes", component.airflowNotes);
-
     // CAPACITOR
     reportText += reportCapacitor("Blower", component.blowerCap, component.blowerCapRated, component.blowerCapPM);
     reportText += reportField("Capacitor Notes", component.capNotes);
@@ -145,7 +142,6 @@ function generateReport() {
         reportText += component.sn ? " SN " + component.sn : "";
         reportText += "\n";
 
-
         reportText += reportField("Model", component.model);
         reportText += reportField("Notes", component.infoNotes);
 
@@ -157,6 +153,7 @@ function generateReport() {
                 reportText += generateFurnaceReport(component);
                 break;
             case "FAU":
+                reportText += generateFAUReport(component);
                 break;
             case "Coil":
                 break;
@@ -308,15 +305,10 @@ $(document).ready(function () {
     $('#copy-button').click(function() {
         let copyText = $('#reportNotes').text();
         console.log(copyText);
-
         var originalTitle = $('#copy-button').attr('data-bs-original-title');
-        /* Copy the text inside the text field */
         var success = navigator.clipboard.writeText(copyText);
-
         $('#copy-button').attr('data-bs-original-title', success ? "Copied!" : "Failed to copy.").tooltip('show');
-
         $('#copy-button').attr('data-bs-original-title', originalTitle);
-
     });
 
     $('#report-button').click(function() {
@@ -328,8 +320,8 @@ $(document).ready(function () {
     $('#clear-button').click(function() {
         if (confirm("Are you sure you want to delete ALL components and start fresh?")) {
             clearComponents();
+            updateComponents();
         }
-        updateComponents();
     });
 
     $('#add-button').click(function() {
@@ -341,14 +333,14 @@ $(document).ready(function () {
     $('#delete-button').click(function() {
         if(confirm("Are you sure you want to delete the current component?")) {
             components.splice(activeIndex, 1);
-        }
-        activeIndex -= 1;
+            activeIndex -= 1;
 
-        if(activeIndex < 0 || activeIndex > components.length-1) {
-            activeIndex = components.length-1;
-        }
+            if(activeIndex < 0 || activeIndex > components.length-1) {
+                activeIndex = components.length-1;
+            }
 
-        updateComponents();
+            updateComponents();
+        }
     });
 
     $('.model-val').change(function() {
