@@ -307,9 +307,25 @@ function drawComponents() {
         if (componentType.length > 4) {
             componentType = componentType.substr(0, 4) + ".";
         }
+        switch (component.type) {
+            case "Condensor":
+                componentType = '<i class="fas fa-dice-d6"></i> ' + componentType;
+                break;
+            case "FAU":
+                componentType = '<i class="fas fa-fan"></i> ' + componentType;
+                break;
+            case "Furnace":
+                componentType = '<i class="fas fa-fire"></i> ' + componentType;
+                break;
+            case "Coil":
+                componentType = '<i class="fas fa-temperature-low"></i> ' + componentType;
+                break;
+            default:
+                componentType = '<i class="fas fa-star-of-life"></i> ' + componentType;
+        }
 
         var componentTitle = componentType;
-        componentTitle += component.sn ? " #" + component.sn.trim().substr(-4) : "";
+        componentTitle += component.sn ? ' #' + component.sn.trim().substr(-4) : "";
 
         $('#componentsTab').append('<li class="nav-item"><button class="' + classVal + '">' + componentTitle + '</button></li>');
 
