@@ -457,7 +457,7 @@ $(document).ready(function () {
             if(document.activeElement.tagName=="INPUT"){
                 window.setTimeout(function(){
                     document.activeElement.scrollIntoView({block: "center"});
-                }, 1000);
+                }, 0);
             }
         });
         
@@ -466,7 +466,7 @@ $(document).ready(function () {
             let el = $(this)[0];
             window.setTimeout(function(){
                 el.scrollIntoView({block: "center"});
-            }, 1000);
+            }, 100);
             
         });
         
