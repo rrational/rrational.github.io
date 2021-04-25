@@ -64,11 +64,13 @@
     <title>Notes</title>
   </head>
   <body>
+    <!-- Report Button -->
     <div class="container">
       <button type="button" class="btn btn-success" id="report-button"><i class="fas fa-clipboard-list"></i> Generate Report</button>
     </div>
     <hr>
     <div class="container">
+      <!-- Add/Delete/Clear Buttons -->
       <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
         <div class="btn-group" role="group" aria-label="First group">
           <button type="button" class="btn btn-outline-success" id="add-button"><i class="fas fa-plus"></i> Add</button>
@@ -78,421 +80,425 @@
           <button type="button" class="btn btn-outline-danger" id="clear-button"><i class="fas fa-recycle"></i> Clear</button>
         </div>
       </div>
-        <ul class="nav nav-pills nav-fill" id="componentsTab">
-          <!-- COMPONENTS UL -->
-        </ul>
+      <!-- Components buttons -->
+      <ul class="nav nav-pills nav-fill" id="componentsTab">
+        <!-- COMPONENTS UL -->
+      </ul>
       </div>
 
     <div class="container invisible" id="componentForm">
-      <div class="tab-content" id="myTabContent">
-        <ul class="nav nav-tabs nav-justified" id="dataTab" role="tablist">
-          <li class="nav-item" role="presentation">
-            <button class="nav-link active data-tab" id="info-tab" data-bs-toggle="tab" data-bs-target="#info" type="button" role="tab" aria-controls="info" aria-selected="true">Info</button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button class="nav-link data-tab" id="electrical-tab" data-bs-toggle="tab" data-bs-target="#electrical" type="button" role="tab" aria-controls="electrical" aria-selected="false">Electrical</button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button class="nav-link data-tab" id="refrigerant-tab" data-bs-toggle="tab" data-bs-target="#refrigerant" type="button" role="tab" aria-controls="refrigerant" aria-selected="false">Refrigerant</button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button class="nav-link data-tab" id="airflow-tab" data-bs-toggle="tab" data-bs-target="#airflow" type="button" role="tab" aria-controls="airflow" aria-selected="true">Airflow</button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button class="nav-link data-tab" id="capacitor-tab" data-bs-toggle="tab" data-bs-target="#capacitor" type="button" role="tab" aria-controls="capacitor" aria-selected="false">Capacitor</button>
-          </li>
-        </ul>
+      <!-- Info/Electrical/Refrigerant/Airflow/Capacitor buttons -->
+      <ul class="nav nav-tabs nav-justified" id="dataTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active data-tab" id="info-tab" data-bs-toggle="tab" data-bs-target="#info" type="button" role="tab" aria-controls="info" aria-selected="true">Info</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link data-tab" id="electrical-tab" data-bs-toggle="tab" data-bs-target="#electrical" type="button" role="tab" aria-controls="electrical" aria-selected="false">Electrical</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link data-tab" id="refrigerant-tab" data-bs-toggle="tab" data-bs-target="#refrigerant" type="button" role="tab" aria-controls="refrigerant" aria-selected="false">Refrigerant</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link data-tab" id="airflow-tab" data-bs-toggle="tab" data-bs-target="#airflow" type="button" role="tab" aria-controls="airflow" aria-selected="true">Airflow</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link data-tab" id="capacitor-tab" data-bs-toggle="tab" data-bs-target="#capacitor" type="button" role="tab" aria-controls="capacitor" aria-selected="false">Capacitor</button>
+        </li>
+      </ul>
 
-        <div class="tab-content" id="dataContent">
-          <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab">
-            <div class="row field-row">
-              <div class="col-sm-3">
-                <label for="type" class="form-label">Type</label>
-              </div>
-              <div class="col-sm">
-                <select class="form-control model-val" id="type" aria-describedby="typeHelp">
-                  <option value="Condensor">Condensor</option>
-                  <option value="Furnace">Furnace</option>
-                  <option value="FAU">FAU</option>
-                  <option value="Coil">Coil</option>
-                </select>
-                <div id="typeHelp" class="form-text">Type</div>
-              </div>
+      <div class="tab-content" id="dataContent">
+        <!-- Info tab -->
+        <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab">
+          <div class="row field-row">
+            <div class="col-sm-3">
+              <label for="type" class="form-label">Type</label>
             </div>
-            <div class="row field-row">
-              <div class="col-sm-3">
-                <label for="sn" class="form-label">SN</label>
-              </div>
-              <div class="col-sm">
-                <input type="input" class="form-control model-val" id="sn" aria-describedby="snHelp">
-                <div id="snHelp" class="form-text">Last 4 of Serial Number</div>
-              </div>
-            </div>
-            <div class="row field-row">
-              <div class="col-sm-3">
-                <label for="model" class="form-label">Model</label>
-              </div>
-              <div class="col-sm">
-                <input type="input" class="form-control model-val" id="model" aria-describedby="modelHelp">
-                <div id="modelHelp" class="form-text">Model</div>
-              </div>
-            </div>
-            <div class="row field-row">
-              <div class="col-sm-3">
-                <label for="infoNotes" class="form-label">Notes</label>
-              </div>
-              <div class="col-sm">
-                <textarea  class="form-control model-val" id="infoNotes" aria-describedby="infoNotesHelp"></textarea>
-                <div id="infoNotesHelp" class="form-text">Notes</div>
-              </div>
+            <div class="col-sm">
+              <select class="form-control model-val" id="type" aria-describedby="typeHelp">
+                <option value="Condensor">Condensor</option>
+                <option value="Furnace">Furnace</option>
+                <option value="FAU">FAU</option>
+                <option value="Coil">Coil</option>
+              </select>
+              <div id="typeHelp" class="form-text">Type</div>
             </div>
           </div>
-
-          <div class="tab-pane fade" id="airflow" role="tabpanel" aria-labelledby="airflow-tab">
-            <div class="row field-row">
-              <div class="col-sm-3">
-                <label for="tempSplit" class="form-label">ΔT</label>
-              </div>
-              <div class="col-sm">
-                <input type="input" class="form-control model-val" id="tempSplit" aria-describedby="tempSplitHelp">
-                <div id="tempSplitHelp" class="form-text">Temp Rise or Fall (°F)</div>
-              </div>
+          <div class="row field-row">
+            <div class="col-sm-3">
+              <label for="sn" class="form-label">SN</label>
             </div>
-            <div class="row field-row">
-              <div class="col-sm-3">
-                <label for="esp" class="form-label">ESP</label>
-              </div>
-              <div class="col-sm">
-                <input type="input" class="form-control model-val" id="esp" aria-describedby="espHelp">
-                <div id="espHelp" class="form-text">External Static Pressure (" WC)</div>
-              </div>
-            </div>
-            <div class="row field-row">
-              <div class="col-sm-3">
-                <label for="airflowNotes" class="form-label">Notes</label>
-              </div>
-              <div class="col-sm">
-                <textarea  class="form-control model-val" id="airflowNotes" aria-describedby="airflowNotesHelp"></textarea>
-                <div id="airflowNotesHelp" class="form-text">Notes</div>
-              </div>
+            <div class="col-sm">
+              <input type="input" class="form-control model-val" id="sn" aria-describedby="snHelp">
+              <div id="snHelp" class="form-text">Last 4 of Serial Number</div>
             </div>
           </div>
-
-          <div class="tab-pane fade" id="electrical" role="tabpanel" aria-labelledby="electrical-tab">
-            <div class="row field-row">
-              <div class="col-sm-3">
-                <label for="fla" class="form-label">FLA</label>
-              </div>
-              <div class="col-sm">
-                <div class="row">
-                  <div class="col">
-                    <input type="input" class="form-control model-val" id="fla" aria-describedby="flaHelp">
-                    <div id="flaHelp" class="form-text">FLA (a)</div>
-                  </div>
-                  <div class="col">
-                    <input type="input" class="form-control model-val" id="flaRated" aria-describedby="flaRatedHelp">
-                    <div id="flaRatedHelp" class="form-text">FLA Rated (a)</div>
-                  </div>
-                </div>
-              </div>
+          <div class="row field-row">
+            <div class="col-sm-3">
+              <label for="model" class="form-label">Model</label>
             </div>
-            <div class="row field-row" id="rlaRow">
-              <div class="col-sm-3">
-                <label for="condensorrla" class="form-label">RLA</label>
-              </div>
-              <div class="col-sm">
-                <div class="row">
-                  <div class="col">
-                    <input type="input" class="form-control model-val" id="rla" aria-describedby="rlaHelp">
-                    <div id="rlaHelp" class="form-text">RLA (a)</div>
-                  </div>
-                  <div class="col">
-                    <input type="input" class="form-control model-val" id="rlaRated" aria-describedby="rlaRatedHelp">
-                    <div id="rlaRatedHelp" class="form-text">RLA Rated (a)</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="row field-row" id="lraRow">
-              <div class="col-sm-3">
-                <label for="lra" class="form-label">LRA</label>
-              </div>
-              <div class="col-sm">
-                <div class="row">
-                  <div class="col">
-                    <input type="input" class="form-control model-val" id="lra" aria-describedby="lraHelp">
-                    <div id="lraHelp" class="form-text">LRA (a)</div>
-                  </div>
-                  <div class="col">
-                    <input type="input" class="form-control model-val" id="lraRated" aria-describedby="lraRatedHelp">
-                    <div id="lraRatedHelp" class="form-text">LRA Rated (a)</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="row field-row" id="inducerRow">
-              <div class="col-sm-3">
-                <label for="inducerAmps" class="form-label">Inducer</label>
-              </div>
-              <div class="col-sm">
-                <div class="row">
-                  <div class="col">
-                    <input type="input" class="form-control model-val" id="inducerAmps" aria-describedby="inducerAmpsHelp">
-                    <div id="inducerAmpsHelp" class="form-text">Inducer (a)</div>
-                  </div>
-                  <div class="col">
-                    <input type="input" class="form-control model-val" id="inducerAmpsRated" aria-describedby="inducerAmpsRatedHelp">
-                    <div id="inducerAmpsRatedHelp" class="form-text">Inducer Rated (a)</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="row field-row" id="flameSensorRow">
-              <div class="col-sm-3">
-                <label for="flameSensorAmps" class="form-label">Flame Sensor</label>
-              </div>
-              <div class="col-sm">
-                <div class="row">
-                  <div class="col">
-                    <input type="input" class="form-control model-val" id="flameSensorAmps" aria-describedby="flameSensorAmpsHelp">
-                    <div id="flameSensorAmpsHelp" class="form-text">Flame Sensor (µa)</div>
-                  </div>
-                  <div class="col">
-                    <input type="input" class="form-control model-val" id="flameSensorAmpsRated" aria-describedby="flameSensorAmpsRatedHelp">
-                    <div id="flameSensorAmpsRatedHelp" class="form-text">Flame Sensor Rated (µa)</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="row field-row">
-              <div class="col-sm-3">
-                <label for="electricalNotes" class="form-label">Notes</label>
-              </div>
-              <div class="col-sm">
-                <textarea  class="form-control model-val" id="electricalNotes" aria-describedby="electricalNotesHelp"></textarea>
-                <div id="electricalNotesHelp" class="form-text">Notes</div>
-              </div>
+            <div class="col-sm">
+              <input type="input" class="form-control model-val" id="model" aria-describedby="modelHelp">
+              <div id="modelHelp" class="form-text">Model</div>
             </div>
           </div>
-
-          <div class="tab-pane fade" id="refrigerant" role="tabpanel" aria-labelledby="refrigerant-tab">
-            <div class="row field-row">
-              <div class="col-sm-3">
-                <label for="meteringDevice" class="form-label">Meter</label>
-              </div>
-              <div class="col-sm">
-                <div class="row">
-                  <div class="col">
-                    <select class="form-control model-val" id="meteringDevice" aria-describedby="meteringDeviceHelp">
-                      <option value=""></option>
-                      <option value="TXV">TXV</option>
-                      <option value="Piston">Piston</option>
-                      <option value="EEV">EEV</option>
-                      <option value="Capilary Tube">Capilary Tube</option>
-                      <option value="Other">Other</option>
-                      <option value="Unknown">Unknown</option>
-                    </select>
-                    <div id="meteringDeviceHelp" class="form-text">Metering Device</div>
-                  </div>
-                </div>
-              </div>
+          <div class="row field-row">
+            <div class="col-sm-3">
+              <label for="infoNotes" class="form-label">Notes</label>
             </div>
-            <div class="row field-row">
-              <div class="col-sm-3">
-                <label for="sc" class="form-label">Subcool</label>
-              </div>
-              <div class="col-sm">
-                <div class="row">
-                  <div class="col">
-                    <input type="input" class="form-control model-val" id="sc" aria-describedby="scHelp">
-                    <div id="scHelp" class="form-text">Subcool (°F)</div>
-                  </div>
-                  <div class="col">
-                    <input type="input" class="form-control model-val" id="scRated" aria-describedby="scRatedHelp">
-                    <div id="scRatedHelp" class="form-text">Target Subcool (°F)</div>
-                  </div>
-                  <div class="col">
-                    <input type="input" class="form-control model-val" id="liquidPSIG" aria-describedby="liquidPSIGHelp">
-                    <div id="liquidPSIGHelp" class="form-text">Liquid Pressure (PSIG)</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row field-row">
-              <div class="col-sm-3">
-                <label for="sh" class="form-label">Superheat</label>
-              </div>
-              <div class="col-sm">
-                <div class="row">
-                  <div class="col">
-                    <input type="input" class="form-control model-val" id="sh" aria-describedby="shHelp">
-                    <div id="shHelp" class="form-text">Superheat (°F)</div>
-                  </div>
-                  <div class="col">
-                    <input type="input" class="form-control model-val" id="shRated" aria-describedby="shRatedHelp">
-                    <div id="shRatedHelp" class="form-text">Target Superheat (°F)</div>
-                  </div>
-                  <div class="col">
-                    <input type="input" class="form-control model-val" id="suctionPSIG" aria-describedby="suctionPSIGHelp">
-                    <div id="suctionPSIGHelp" class="form-text">Suction Pressure (PSIG)</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row field-row">
-              <div class="col-sm-3">
-                <label for="oddb" class="form-label">ODDB/IDWB</label>
-              </div>
-              <div class="col-sm">
-                <div class="row">
-                  <div class="col">
-                    <input type="input" class="form-control model-val" id="oddb" aria-describedby="oddbHelp">
-                    <div id="oddbHelp" class="form-text">ODDB (°F)</div>
-                  </div>
-                  <div class="col">
-                    <input type="input" class="form-control model-val" id="idwb" aria-describedby="idwbHelp">
-                    <div id="idwbHelp" class="form-text">IDWB (°F)</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row field-row">
-              <div class="col-sm-3">
-                <label for="refrigerantNotes" class="form-label">Notes</label>
-              </div>
-              <div class="col-sm">
-                <textarea  class="form-control model-val" id="refrigerantNotes" aria-describedby="refrigerantNotesHelp"></textarea>
-                <div id="refrigerantNotesHelp" class="form-text">Notes</div>
-              </div>
+            <div class="col-sm">
+              <textarea  class="form-control model-val" id="infoNotes" aria-describedby="infoNotesHelp"></textarea>
+              <div id="infoNotesHelp" class="form-text">Notes</div>
             </div>
           </div>
-
-          <div class="tab-pane fade" id="capacitor" role="tabpanel" aria-labelledby="capacitor-tab">
-            <div class="row field-row" id="blowerCapRow">
-              <div class="col-sm-3">
-                <label for="blowerCap" class="form-label">Blower</label>
-              </div>
-              <div class="col-sm">
-                <div class="row">
-                  <div class="col">
-                    <input type="input" class="form-control model-val" id="blowerCap" aria-describedby="blowerCapHelp">
-                    <div id="blowerCapHelp" class="form-text">Blower Cap (µF)</div>
-                  </div>
-                  <div class="col">
-                    <input type="input" class="form-control model-val" id="blowerCapRated" aria-describedby="blowerCapRatedHelp">
-                    <div id="blowerCapRatedHelp" class="form-text">Rated (µF)</div>
-                  </div>
-                  <div class="col-3">
-                    <select class="form-control model-val" id="blowerCapPM" aria-describedby="blowerCapPMHelp">
-                      <option value=""></option>
-                      <option value="5">5</option>
-                      <option value="6">6</option>
-                      <option value="10">10</option>
-                    </select>
-                    <div id="blowerCapPMHelp" class="form-text">±%</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row field-row" id="fanCapRow">
-              <div class="col-sm-3">
-                <label for="fanCap" class="form-label">Fan</label>
-              </div>
-              <div class="col-sm">
-                <div class="row">
-                  <div class="col">
-                    <input type="input" class="form-control model-val" id="fanCap" aria-describedby="fanCapHelp">
-                    <div id="fanCapHelp" class="form-text">Fan Cap (µF)</div>
-                  </div>
-                  <div class="col">
-                    <input type="input" class="form-control model-val" id="fanCapRated" aria-describedby="fanCapRatedHelp">
-                    <div id="fanCapRatedHelp" class="form-text">Rated (µF)</div>
-                  </div>
-                  <div class="col-3">
-                    <select class="form-control model-val" id="fanCapPM" aria-describedby="fanCapPMHelp">
-                      <option value=""></option>
-                      <option value="5">5</option>
-                      <option value="6">6</option>
-                      <option value="10">10</option>
-                    </select>
-                    <div id="fanCapPMHelp" class="form-text">±%</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row field-row" id="hermCapRow">
-              <div class="col-sm-3">
-                <label for="hermCap" class="form-label">Herm</label>
-              </div>
-              <div class="col-sm">
-                <div class="row">
-                  <div class="col">
-                    <input type="input" class="form-control model-val" id="hermCap" aria-describedby="hermCapHelp">
-                    <div id="hermCapHelp" class="form-text">Herm Cap (µF)</div>
-                  </div>
-                  <div class="col">
-                    <input type="input" class="form-control model-val" id="hermCapRated" aria-describedby="hermCapRatedHelp">
-                    <div id="hermCapRatedHelp" class="form-text">Rated (µF)</div>
-                  </div>
-                  <div class="col-3">
-                    <select class="form-control model-val" id="hermCapPM" aria-describedby="hermCapPMHelp">
-                      <option value=""></option>
-                      <option value="5">5</option>
-                      <option value="6">6</option>
-                      <option value="10">10</option>
-                    </select>
-                    <div id="hermCapPMHelp" class="form-text">±%</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row field-row" id="inducerCapRow">
-              <div class="col-sm-3">
-                <label for="inducerCap" class="form-label">Inducer</label>
-              </div>
-              <div class="col-sm">
-                <div class="row">
-                  <div class="col">
-                    <input type="input" class="form-control model-val" id="inducerCap" aria-describedby="inducerCapHelp">
-                    <div id="inducerCapHelp" class="form-text">Inducer Cap (µF)</div>
-                  </div>
-                  <div class="col">
-                    <input type="input" class="form-control model-val" id="inducerCapRated" aria-describedby="inducerCapRatedHelp">
-                    <div id="inducerCapRatedHelp" class="form-text">Rated (µF)</div>
-                  </div>
-                  <div class="col-3">
-                    <select class="form-control model-val" id="inducerCapPM" aria-describedby="inducerCapPMHelp">
-                      <option value=""></option>
-                      <option value="5">5</option>
-                      <option value="6">6</option>
-                      <option value="10">10</option>
-                    </select>
-                    <div id="inducerCapPMHelp" class="form-text">±%</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row field-row">
-              <div class="col-sm-3">
-                <label for="capNotes" class="form-label">Notes</label>
-              </div>
-              <div class="col-sm">
-                <textarea  class="form-control model-val" id="capNotes" aria-describedby="capNotesHelp"></textarea>
-                <div id="capNotesHelp" class="form-text">Notes</div>
-              </div>
-            </div>
-          </div>
-
         </div>
+        <!-- End Info tab -->
 
+        <!-- Airflow tab -->
+        <div class="tab-pane fade" id="airflow" role="tabpanel" aria-labelledby="airflow-tab">
+          <div class="row field-row">
+            <div class="col-sm-3">
+              <label for="tempSplit" class="form-label">ΔT</label>
+            </div>
+            <div class="col-sm">
+              <input type="input" class="form-control model-val" id="tempSplit" aria-describedby="tempSplitHelp">
+              <div id="tempSplitHelp" class="form-text">Temp Rise or Fall (°F)</div>
+            </div>
+          </div>
+          <div class="row field-row">
+            <div class="col-sm-3">
+              <label for="esp" class="form-label">ESP</label>
+            </div>
+            <div class="col-sm">
+              <input type="input" class="form-control model-val" id="esp" aria-describedby="espHelp">
+              <div id="espHelp" class="form-text">External Static Pressure (" WC)</div>
+            </div>
+          </div>
+          <div class="row field-row">
+            <div class="col-sm-3">
+              <label for="airflowNotes" class="form-label">Notes</label>
+            </div>
+            <div class="col-sm">
+              <textarea  class="form-control model-val" id="airflowNotes" aria-describedby="airflowNotesHelp"></textarea>
+              <div id="airflowNotesHelp" class="form-text">Notes</div>
+            </div>
+          </div>
+        </div>
+        <!-- End Airflow tab -->
+
+        <!-- Electrical tab -->
+        <div class="tab-pane fade" id="electrical" role="tabpanel" aria-labelledby="electrical-tab">
+          <div class="row field-row">
+            <div class="col-sm-3">
+              <label for="fla" class="form-label">FLA</label>
+            </div>
+            <div class="col-sm">
+              <div class="row">
+                <div class="col">
+                  <input type="input" class="form-control model-val" id="fla" aria-describedby="flaHelp">
+                  <div id="flaHelp" class="form-text">FLA (a)</div>
+                </div>
+                <div class="col">
+                  <input type="input" class="form-control model-val" id="flaRated" aria-describedby="flaRatedHelp">
+                  <div id="flaRatedHelp" class="form-text">FLA Rated (a)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row field-row" id="rlaRow">
+            <div class="col-sm-3">
+              <label for="condensorrla" class="form-label">RLA</label>
+            </div>
+            <div class="col-sm">
+              <div class="row">
+                <div class="col">
+                  <input type="input" class="form-control model-val" id="rla" aria-describedby="rlaHelp">
+                  <div id="rlaHelp" class="form-text">RLA (a)</div>
+                </div>
+                <div class="col">
+                  <input type="input" class="form-control model-val" id="rlaRated" aria-describedby="rlaRatedHelp">
+                  <div id="rlaRatedHelp" class="form-text">RLA Rated (a)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row field-row" id="lraRow">
+            <div class="col-sm-3">
+              <label for="lra" class="form-label">LRA</label>
+            </div>
+            <div class="col-sm">
+              <div class="row">
+                <div class="col">
+                  <input type="input" class="form-control model-val" id="lra" aria-describedby="lraHelp">
+                  <div id="lraHelp" class="form-text">LRA (a)</div>
+                </div>
+                <div class="col">
+                  <input type="input" class="form-control model-val" id="lraRated" aria-describedby="lraRatedHelp">
+                  <div id="lraRatedHelp" class="form-text">LRA Rated (a)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row field-row" id="inducerRow">
+            <div class="col-sm-3">
+              <label for="inducerAmps" class="form-label">Inducer</label>
+            </div>
+            <div class="col-sm">
+              <div class="row">
+                <div class="col">
+                  <input type="input" class="form-control model-val" id="inducerAmps" aria-describedby="inducerAmpsHelp">
+                  <div id="inducerAmpsHelp" class="form-text">Inducer (a)</div>
+                </div>
+                <div class="col">
+                  <input type="input" class="form-control model-val" id="inducerAmpsRated" aria-describedby="inducerAmpsRatedHelp">
+                  <div id="inducerAmpsRatedHelp" class="form-text">Inducer Rated (a)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row field-row" id="flameSensorRow">
+            <div class="col-sm-3">
+              <label for="flameSensorAmps" class="form-label">Flame Sensor</label>
+            </div>
+            <div class="col-sm">
+              <div class="row">
+                <div class="col">
+                  <input type="input" class="form-control model-val" id="flameSensorAmps" aria-describedby="flameSensorAmpsHelp">
+                  <div id="flameSensorAmpsHelp" class="form-text">Flame Sensor (µa)</div>
+                </div>
+                <div class="col">
+                  <input type="input" class="form-control model-val" id="flameSensorAmpsRated" aria-describedby="flameSensorAmpsRatedHelp">
+                  <div id="flameSensorAmpsRatedHelp" class="form-text">Flame Sensor Rated (µa)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row field-row">
+            <div class="col-sm-3">
+              <label for="electricalNotes" class="form-label">Notes</label>
+            </div>
+            <div class="col-sm">
+              <textarea  class="form-control model-val" id="electricalNotes" aria-describedby="electricalNotesHelp"></textarea>
+              <div id="electricalNotesHelp" class="form-text">Notes</div>
+            </div>
+          </div>
+        </div>
+        <!-- End Electrical tab -->
+
+        <!-- Refrigerant tab -->
+        <div class="tab-pane fade" id="refrigerant" role="tabpanel" aria-labelledby="refrigerant-tab">
+          <div class="row field-row">
+            <div class="col-sm-3">
+              <label for="meteringDevice" class="form-label">Meter</label>
+            </div>
+            <div class="col-sm">
+              <div class="row">
+                <div class="col">
+                  <select class="form-control model-val" id="meteringDevice" aria-describedby="meteringDeviceHelp">
+                    <option value=""></option>
+                    <option value="TXV">TXV</option>
+                    <option value="Piston">Piston</option>
+                    <option value="EEV">EEV</option>
+                    <option value="Capilary Tube">Capilary Tube</option>
+                    <option value="Other">Other</option>
+                    <option value="Unknown">Unknown</option>
+                  </select>
+                  <div id="meteringDeviceHelp" class="form-text">Metering Device</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row field-row">
+            <div class="col-sm-3">
+              <label for="sc" class="form-label">Subcool</label>
+            </div>
+            <div class="col-sm">
+              <div class="row">
+                <div class="col">
+                  <input type="input" class="form-control model-val" id="sc" aria-describedby="scHelp">
+                  <div id="scHelp" class="form-text">Subcool (°F)</div>
+                </div>
+                <div class="col">
+                  <input type="input" class="form-control model-val" id="scRated" aria-describedby="scRatedHelp">
+                  <div id="scRatedHelp" class="form-text">Target Subcool (°F)</div>
+                </div>
+                <div class="col">
+                  <input type="input" class="form-control model-val" id="liquidPSIG" aria-describedby="liquidPSIGHelp">
+                  <div id="liquidPSIGHelp" class="form-text">Liquid Pressure (PSIG)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row field-row">
+            <div class="col-sm-3">
+              <label for="sh" class="form-label">Superheat</label>
+            </div>
+            <div class="col-sm">
+              <div class="row">
+                <div class="col">
+                  <input type="input" class="form-control model-val" id="sh" aria-describedby="shHelp">
+                  <div id="shHelp" class="form-text">Superheat (°F)</div>
+                </div>
+                <div class="col">
+                  <input type="input" class="form-control model-val" id="shRated" aria-describedby="shRatedHelp">
+                  <div id="shRatedHelp" class="form-text">Target Superheat (°F)</div>
+                </div>
+                <div class="col">
+                  <input type="input" class="form-control model-val" id="suctionPSIG" aria-describedby="suctionPSIGHelp">
+                  <div id="suctionPSIGHelp" class="form-text">Suction Pressure (PSIG)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row field-row">
+            <div class="col-sm-3">
+              <label for="oddb" class="form-label">ODDB/IDWB</label>
+            </div>
+            <div class="col-sm">
+              <div class="row">
+                <div class="col">
+                  <input type="input" class="form-control model-val" id="oddb" aria-describedby="oddbHelp">
+                  <div id="oddbHelp" class="form-text">ODDB (°F)</div>
+                </div>
+                <div class="col">
+                  <input type="input" class="form-control model-val" id="idwb" aria-describedby="idwbHelp">
+                  <div id="idwbHelp" class="form-text">IDWB (°F)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row field-row">
+            <div class="col-sm-3">
+              <label for="refrigerantNotes" class="form-label">Notes</label>
+            </div>
+            <div class="col-sm">
+              <textarea  class="form-control model-val" id="refrigerantNotes" aria-describedby="refrigerantNotesHelp"></textarea>
+              <div id="refrigerantNotesHelp" class="form-text">Notes</div>
+            </div>
+          </div>
+        </div>
+        <!-- End Refrigerant tab -->
+
+        <!-- Capacitor tab -->
+        <div class="tab-pane fade" id="capacitor" role="tabpanel" aria-labelledby="capacitor-tab">
+          <div class="row field-row" id="blowerCapRow">
+            <div class="col-sm-3">
+              <label for="blowerCap" class="form-label">Blower</label>
+            </div>
+            <div class="col-sm">
+              <div class="row">
+                <div class="col">
+                  <input type="input" class="form-control model-val" id="blowerCap" aria-describedby="blowerCapHelp">
+                  <div id="blowerCapHelp" class="form-text">Blower Cap (µF)</div>
+                </div>
+                <div class="col">
+                  <input type="input" class="form-control model-val" id="blowerCapRated" aria-describedby="blowerCapRatedHelp">
+                  <div id="blowerCapRatedHelp" class="form-text">Rated (µF)</div>
+                </div>
+                <div class="col-3">
+                  <select class="form-control model-val" id="blowerCapPM" aria-describedby="blowerCapPMHelp">
+                    <option value=""></option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="10">10</option>
+                  </select>
+                  <div id="blowerCapPMHelp" class="form-text">±%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row field-row" id="fanCapRow">
+            <div class="col-sm-3">
+              <label for="fanCap" class="form-label">Fan</label>
+            </div>
+            <div class="col-sm">
+              <div class="row">
+                <div class="col">
+                  <input type="input" class="form-control model-val" id="fanCap" aria-describedby="fanCapHelp">
+                  <div id="fanCapHelp" class="form-text">Fan Cap (µF)</div>
+                </div>
+                <div class="col">
+                  <input type="input" class="form-control model-val" id="fanCapRated" aria-describedby="fanCapRatedHelp">
+                  <div id="fanCapRatedHelp" class="form-text">Rated (µF)</div>
+                </div>
+                <div class="col-3">
+                  <select class="form-control model-val" id="fanCapPM" aria-describedby="fanCapPMHelp">
+                    <option value=""></option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="10">10</option>
+                  </select>
+                  <div id="fanCapPMHelp" class="form-text">±%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row field-row" id="hermCapRow">
+            <div class="col-sm-3">
+              <label for="hermCap" class="form-label">Herm</label>
+            </div>
+            <div class="col-sm">
+              <div class="row">
+                <div class="col">
+                  <input type="input" class="form-control model-val" id="hermCap" aria-describedby="hermCapHelp">
+                  <div id="hermCapHelp" class="form-text">Herm Cap (µF)</div>
+                </div>
+                <div class="col">
+                  <input type="input" class="form-control model-val" id="hermCapRated" aria-describedby="hermCapRatedHelp">
+                  <div id="hermCapRatedHelp" class="form-text">Rated (µF)</div>
+                </div>
+                <div class="col-3">
+                  <select class="form-control model-val" id="hermCapPM" aria-describedby="hermCapPMHelp">
+                    <option value=""></option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="10">10</option>
+                  </select>
+                  <div id="hermCapPMHelp" class="form-text">±%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row field-row" id="inducerCapRow">
+            <div class="col-sm-3">
+              <label for="inducerCap" class="form-label">Inducer</label>
+            </div>
+            <div class="col-sm">
+              <div class="row">
+                <div class="col">
+                  <input type="input" class="form-control model-val" id="inducerCap" aria-describedby="inducerCapHelp">
+                  <div id="inducerCapHelp" class="form-text">Inducer Cap (µF)</div>
+                </div>
+                <div class="col">
+                  <input type="input" class="form-control model-val" id="inducerCapRated" aria-describedby="inducerCapRatedHelp">
+                  <div id="inducerCapRatedHelp" class="form-text">Rated (µF)</div>
+                </div>
+                <div class="col-3">
+                  <select class="form-control model-val" id="inducerCapPM" aria-describedby="inducerCapPMHelp">
+                    <option value=""></option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="10">10</option>
+                  </select>
+                  <div id="inducerCapPMHelp" class="form-text">±%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row field-row">
+            <div class="col-sm-3">
+              <label for="capNotes" class="form-label">Notes</label>
+            </div>
+            <div class="col-sm">
+              <textarea  class="form-control model-val" id="capNotes" aria-describedby="capNotesHelp"></textarea>
+              <div id="capNotesHelp" class="form-text">Notes</div>
+            </div>
+          </div>
+        </div>
+        <!-- EndCapacitor tab -->
       </div>
     </div>
 
-
+    <!-- Generate Report Modal Popup -->
     <div class="modal" id="reportModal" tabindex="-1">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -519,6 +525,7 @@
       </div>
     </div>
 
+    <!-- Whitespace at bottom of page -->
     <div class="container overflow-hidden py-4">
       <div class="row gy-5">
         <div class="col">
