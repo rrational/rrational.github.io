@@ -451,11 +451,30 @@ $(document).ready(function () {
     });
 
     // Scroll input into focus when clicked. (Fix for cell phones)
-    $('body').on('focus', 'input, textarea', function() {
-        if(navigator.userAgent.indexOf('Android') > -1) {
-            $(this).closest('.field-row')[0].scrollIntoView({block: "start"});
-        }
-    });
+    if(navigator.userAgent.indexOf('Android') > -1) {
+        $('body').on('focus', 'input, textarea', function() {
+            //$(this).closest('.field-row')[0].scrollIntoView({block: "start"});
+            let el = $(this)[0];
+            window.setTimeout(function(){
+                el.scrollIntoView({block: "center"});
+            },0);
+            
+        });
+    }
+    /*
+    // Using event listener on resize might be a better solution
+    // Also, setTimeout is a good idea to scrollIntoView AFTER keyboard shows up
+    // Then I could maybe use {block: "center"} instead of start
+    if(/Android 4\.[0-3]/.test(navigator.appVersion)){
+        window.addEventListener("resize", function() {
+            if(document.activeElement.tagName=="INPUT"){
+                window.setTimeout(function(){
+                    document.activeElement.scrollIntoViewIfNeeded();
+                },0);
+            }
+        })
+    }
+    */
 });
 
 // Add a whole bunch of whitespace at the bottom of the page for android
