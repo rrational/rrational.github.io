@@ -298,15 +298,17 @@ function drawComponents() {
     $('#componentsTab').empty();
     for (let id in components) {
         var component = components[id];
-        var classVal = 'nav-link';
+        var classVal = 'nav-link btn-sm';
         if (id == activeIndex) {
             classVal += ' active'
         }
 
         var componentType = component.type ? component.type.trim() : "New";
-        //if (componentType.length > 4) {
-        //    componentType = componentType.substr(0, 4) + ".";
-        //}
+        if (components.length > 3) {
+            if (componentType.length > 4) {
+                componentType = componentType.substr(0, 4) + ".";
+            }
+        }
         switch (component.type) {
             case "Condensor":
                 componentType = '<i class="fas fa-dice-d6"></i> ' + componentType;
@@ -325,7 +327,7 @@ function drawComponents() {
         }
 
         var componentTitle = componentType;
-        componentTitle += component.sn ? ' ' + component.sn.trim().substr(-4) : "";
+        componentTitle += component.sn ? '<footer class="text-muted sn-text">' + component.sn.trim().substr(-4) + '</footer>' : '<footer class="text-muted sn-text">&nbsp;</footer>';
 
         $('#componentsTab').append('<li class="nav-item"><button class="' + classVal + '">' + componentTitle + '</button></li>');
 
