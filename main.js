@@ -327,7 +327,7 @@ function drawComponents() {
         }
 
         var componentTitle = componentType;
-        componentTitle += component.sn ? '<footer class="sn-text">' + component.sn.trim().substr(-4) + '</footer>' : '<footer class="sn-text">&nbsp;</footer>';
+        componentTitle += component.sn ? '<footer class="sn-text"><small>s/n</small> ' + component.sn.trim().substr(-4) + '</footer>' : '<footer class="sn-text">&nbsp;</footer>';
 
         $('#componentsTab').append('<li class="nav-item"><button class="' + classVal + '">' + componentTitle + '</button></li>');
 
