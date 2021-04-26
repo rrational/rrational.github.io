@@ -304,9 +304,9 @@ function drawComponents() {
         }
 
         var componentType = component.type ? component.type.trim() : "New";
-        if (componentType.length > 4) {
-            componentType = componentType.substr(0, 4) + ".";
-        }
+        //if (componentType.length > 4) {
+        //    componentType = componentType.substr(0, 4) + ".";
+        //}
         switch (component.type) {
             case "Condensor":
                 componentType = '<i class="fas fa-dice-d6"></i> ' + componentType;
