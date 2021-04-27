@@ -150,7 +150,7 @@ function generateFurnaceReport(component) {
     reportText += reportFieldRated("Flame Sensor ", component.flameSensor, component.flameSensorRated, UNITS_MICROAMPS);
     reportText += reportField("Electrical Notes", component.electricalNotes);
     // Airflow
-    reportText += reportField("ΔT", component.tempSplit, UNITS_DEGREES);
+    reportText += reportField("Delta T", component.tempSplit, UNITS_DEGREES);
     reportText += reportField("ESP", component.esp, UNITS_INCHES_WATERCOLUMN);
     reportText += reportField("Airflow Notes", component.airflowNotes);
     // CAPACITOR
