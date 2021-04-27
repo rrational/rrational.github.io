@@ -171,7 +171,7 @@ function generateFAUReport(component) {
     reportText += reportFieldRated("FLA", component.fla, component.flaRated, UNITS_AMPS);
     reportText += reportField("Electrical Notes", component.electricalNotes);
     // Airflow
-    reportText += reportField("ΔT", component.tempSplit, UNITS_DEGREES);
+    reportText += reportField("Delta T", component.tempSplit, UNITS_DEGREES);
     reportText += reportField("ESP", component.esp, UNITS_INCHES_WATERCOLUMN);
     reportText += reportField("Airflow Notes", component.airflowNotes);
     // CAPACITOR
