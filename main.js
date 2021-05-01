@@ -12,8 +12,9 @@ let UNITS_DEGREES = "°F";
 let UNITS_AMPS = "a";
 let UNITS_VOLTS = "v";
 let UNITS_MICROAMPS = "µa";
-let UNITS_PSIG = "PSIG";
+let UNITS_PSIG = " PSIG";
 let UNITS_INCHES_WATERCOLUMN = "\" WC";
+let UNITS_CFM = " CFM";
 
 
 /**
@@ -125,10 +126,13 @@ function generateCondensorReport(component) {
     reportText += reportField("Electrical Notes", component.electricalNotes);
     // REFRIGERANT
     reportText += reportField("Metering Device", component.meteringDevice);
-    reportText += reportRefrigerant("sh", component.sh, component.shRated, component.suctionPSIG);
-    reportText += reportRefrigerant("sc", component.sc, component.scRated, component.liquidPSIG);
     reportText += reportField("ODDB", component.oddb, UNITS_DEGREES);
     reportText += reportField("IDWB", component.idwb, UNITS_DEGREES);
+    reportText += reportFieldRated("sh", component.sh, component.shRated, UNITS_DEGREES);
+    reportText += reportFieldRated("sc", component.sc, component.scRated, UNITS_DEGREES);
+    reportText += reportFieldRated("Suction Line", component.suctionPSIG, component.targetSuctionPSIG, UNITS_PSIG);
+    reportText += reportFieldRated("Liquid Line", component.liquidPSIG, component.targetLiquidPSIG, UNITS_PSIG);
+    reportText += reportFieldRated("Approach", component.approach, component.targetApproach, UNITS_DEGREES);
     reportText += reportField("Refrigerant Notes", component.refrigerantNotes);
     // CAPACITOR
     reportText += reportCapacitor("Fan", component.fanCap, component.fanCapRated, component.fanCapPM);
@@ -152,6 +156,7 @@ function generateFurnaceReport(component) {
     // Airflow
     reportText += reportField("Delta T", component.tempSplit, UNITS_DEGREES);
     reportText += reportField("ESP", component.esp, UNITS_INCHES_WATERCOLUMN);
+    reportText += reportField("Volume", component.cfm, UNITS_CFM);
     reportText += reportField("Airflow Notes", component.airflowNotes);
     // CAPACITOR
     reportText += reportCapacitor("Blower", component.blowerCap, component.blowerCapRated, component.blowerCapPM);
@@ -169,10 +174,12 @@ function generateFAUReport(component) {
 
     // ELECTRICAL
     reportText += reportFieldRated("FLA", component.fla, component.flaRated, UNITS_AMPS);
+    reportText += reportFieldRated("Heat Strips", component.heatStripAmps, component.heatStripAmpsRated, UNITS_AMPS);
     reportText += reportField("Electrical Notes", component.electricalNotes);
     // Airflow
     reportText += reportField("Delta T", component.tempSplit, UNITS_DEGREES);
     reportText += reportField("ESP", component.esp, UNITS_INCHES_WATERCOLUMN);
+    reportText += reportField("Volume", component.cfm, UNITS_CFM);
     reportText += reportField("Airflow Notes", component.airflowNotes);
     // CAPACITOR
     reportText += reportCapacitor("Blower", component.blowerCap, component.blowerCapRated, component.blowerCapPM);
@@ -256,6 +263,7 @@ function showForm(id) {
     $('#hermCapRow').addClass('invisible').hide();
     $('#fanCapRow').addClass('invisible').hide();
     $('#blowerCapRow').addClass('invisible').hide();
+    $('#heatStripRow').addClass('invisible').hide();
     $('#rlaRow').addClass('invisible').hide();
     $('#lraRow').addClass('invisible').hide();
     $('#flameSensorRow').addClass('invisible').hide();
@@ -277,6 +285,7 @@ function showForm(id) {
         $('#capacitor-tab').removeClass('disabled');
         $('#electrical-tab').removeClass('disabled');
         $('#blowerCapRow').removeClass('invisible').show();
+        $('#heatStripRow').removeClass('invisible').show();
     } else if (component.type == 'Furnace') {
         $('#airflow-tab').removeClass('disabled');
         $('#capacitor-tab').removeClass('disabled');
