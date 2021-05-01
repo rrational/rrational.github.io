@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -189,6 +188,15 @@
           </div>
           <div class="row field-row">
             <div class="col-sm-3">
+              <label for="cfm" class="form-label">Volume</label>
+            </div>
+            <div class="col-sm">
+              <input type="number" step="any" class="form-control model-val" id="cfm" aria-describedby="cfmHelp">
+              <div id="cfmHelp" class="form-text">Cubic Feet per Minute (cfm)</div>
+            </div>
+          </div>
+          <div class="row field-row">
+            <div class="col-sm-3">
               <label for="airflowNotes" class="form-label">Notes</label>
             </div>
             <div class="col-sm">
@@ -286,6 +294,23 @@
               </div>
             </div>
           </div>
+          <div class="row field-row" id="heatStripRow">
+            <div class="col-sm-3">
+              <label for="heatStripAmps" class="form-label">Heat Strips</label>
+            </div>
+            <div class="col-sm">
+              <div class="row">
+                <div class="col">
+                  <input type="number" step="any" class="form-control model-val" id="heatStripAmps" aria-describedby="heatStripAmpsHelp">
+                  <div id="flameSensorAmpsHelp" class="form-text">Heat Strips (a)</div>
+                </div>
+                <div class="col">
+                  <input type="number" step="any" class="form-control model-val" id="heatStripAmpsRated" aria-describedby="heatStripAmpsRatedHelp">
+                  <div id="heatStripAmpsRatedHelp" class="form-text">Heat Strips Rated (a)</div>
+                </div>
+              </div>
+            </div>
+          </div>
           <div class="row field-row">
             <div class="col-sm-3">
               <label for="electricalNotes" class="form-label">Notes</label>
@@ -323,6 +348,31 @@
           </div>
           <div class="row field-row">
             <div class="col-sm-3">
+              <label for="sh" class="form-label">Superheat</label>
+            </div>
+            <div class="col-sm">
+              <div class="row">
+                <div class="col">
+                  <input type="number" step="any" class="form-control model-val" id="sh" aria-describedby="shHelp">
+                  <div id="shHelp" class="form-text">Superheat (°F)</div>
+                </div>
+                <div class="col">
+                  <input type="number" step="any" class="form-control model-val" id="shRated" aria-describedby="shRatedHelp">
+                  <div id="shRatedHelp" class="form-text">Target Superheat (°F)</div>
+                </div>
+                <div class="col">
+                  <input type="number" step="any" class="form-control model-val" id="suctionPSIG" aria-describedby="suctionPSIGHelp">
+                  <div id="suctionPSIGHelp" class="form-text">Suction Pressure (PSIG)</div>
+                </div>
+                <div class="col">
+                  <input type="number" step="any" class="form-control model-val" id="targetSuctionPSIG" aria-describedby="targetSuctionPSIGHelp">
+                  <div id="targetSuctionPSIGHelp" class="form-text">Target Suction (PSIG)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row field-row">
+            <div class="col-sm-3">
               <label for="sc" class="form-label">Subcool</label>
             </div>
             <div class="col-sm">
@@ -339,26 +389,9 @@
                   <input type="number" step="any" class="form-control model-val" id="liquidPSIG" aria-describedby="liquidPSIGHelp">
                   <div id="liquidPSIGHelp" class="form-text">Liquid Pressure (PSIG)</div>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="row field-row">
-            <div class="col-sm-3">
-              <label for="sh" class="form-label">Superheat</label>
-            </div>
-            <div class="col-sm">
-              <div class="row">
                 <div class="col">
-                  <input type="number" step="any" class="form-control model-val" id="sh" aria-describedby="shHelp">
-                  <div id="shHelp" class="form-text">Superheat (°F)</div>
-                </div>
-                <div class="col">
-                  <input type="number" step="any" class="form-control model-val" id="shRated" aria-describedby="shRatedHelp">
-                  <div id="shRatedHelp" class="form-text">Target Superheat (°F)</div>
-                </div>
-                <div class="col">
-                  <input type="number" step="any" class="form-control model-val" id="suctionPSIG" aria-describedby="suctionPSIGHelp">
-                  <div id="suctionPSIGHelp" class="form-text">Suction Pressure (PSIG)</div>
+                  <input type="number" step="any" class="form-control model-val" id="targetLiquidPSIG" aria-describedby="targetLiquidPSIGHelp">
+                  <div id="targetLiquidPSIGHelp" class="form-text">Target Liquid (PSIG)</div>
                 </div>
               </div>
             </div>
@@ -376,6 +409,23 @@
                 <div class="col">
                   <input type="number" step="any" class="form-control model-val" id="idwb" aria-describedby="idwbHelp">
                   <div id="idwbHelp" class="form-text">IDWB (°F)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row field-row">
+            <div class="col-sm-3">
+              <label for="targetApproach" class="form-label">Approach</label>
+            </div>
+            <div class="col-sm">
+              <div class="row">
+                <div class="col">
+                  <input type="number" step="any" class="form-control model-val" id="approach" aria-describedby="approachHelp">
+                  <div id="approachHelp" class="form-text">Approach (°F)</div>
+                </div>
+                <div class="col">
+                  <input type="number" step="any" class="form-control model-val" id="targetApproach" aria-describedby="targetApproachHelp">
+                  <div id="targetApproachHelp" class="form-text">Target Approach (°F)</div>
                 </div>
               </div>
             </div>
