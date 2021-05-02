@@ -77,6 +77,23 @@ function reportFieldRated(label, field, rated, units="", newline=true) {
 }
 
 /**
+ * Formats data for a field that has a target field for a report.
+ */
+function reportFieldTarget(label, field, target, units="", newline=true) {
+    if (!field) {
+        return "";
+    }
+    var reportText = reportField(label, field, units, false);
+    if (target) {
+        reportText += " (target " + target + units + ")";
+    }
+    if (newline) {
+        reportText += "\n";
+    }
+    return reportText;
+}
+
+/**
  * Formats data for the fields associated with a capacitor for a report.
  */
 function reportCapacitor(label, field, rated, plusMinus, newline=true) {
@@ -86,26 +103,6 @@ function reportCapacitor(label, field, rated, plusMinus, newline=true) {
     var reportText = reportFieldRated(label + " Cap", field, rated, UNITS_MICROFARADS, false);
     if (rated && plusMinus) {
         reportText += " " + UNITS_PLUS_MINUS + plusMinus + "%";
-    }
-    if (newline) {
-        reportText += "\n";
-    }
-    return reportText;
-}
-
-/**
- * Formats data for the fields associated with refrigerant readings for a report.
- */
-function reportRefrigerant(label, field, target, pressure, newline=true) {
-    if (!field) {
-        return "";
-    }
-    var reportText = REPORT_FIELD_PREFIX + label + ": " + field + UNITS_DEGREES;
-    if (pressure) {
-        reportText += " @ " + pressure + UNITS_PSIG;
-    }
-    if (target) {
-        reportText += " (target " + label + " " + target + UNITS_DEGREES + ")";
     }
     if (newline) {
         reportText += "\n";
@@ -128,11 +125,11 @@ function generateCondensorReport(component) {
     reportText += reportField("Metering Device", component.meteringDevice);
     reportText += reportField("ODDB", component.oddb, UNITS_DEGREES);
     reportText += reportField("IDWB", component.idwb, UNITS_DEGREES);
-    reportText += reportFieldRated("sh", component.sh, component.shRated, UNITS_DEGREES);
-    reportText += reportFieldRated("sc", component.sc, component.scRated, UNITS_DEGREES);
-    reportText += reportFieldRated("Suction Line", component.suctionPSIG, component.targetSuctionPSIG, UNITS_PSIG);
-    reportText += reportFieldRated("Liquid Line", component.liquidPSIG, component.targetLiquidPSIG, UNITS_PSIG);
-    reportText += reportFieldRated("Approach", component.approach, component.targetApproach, UNITS_DEGREES);
+    reportText += reportFieldTarget("Superheat", component.sh, component.shRated, UNITS_DEGREES);
+    reportText += reportFieldTarget("Subcool", component.sc, component.scRated, UNITS_DEGREES);
+    reportText += reportFieldTarget("Suction Line", component.suctionPSIG, component.targetSuctionPSIG, UNITS_PSIG);
+    reportText += reportFieldTarget("Liquid Line", component.liquidPSIG, component.targetLiquidPSIG, UNITS_PSIG);
+    reportText += reportFieldTarget("Approach", component.approach, component.targetApproach, UNITS_DEGREES);
     reportText += reportField("Refrigerant Notes", component.refrigerantNotes);
     // CAPACITOR
     reportText += reportCapacitor("Fan", component.fanCap, component.fanCapRated, component.fanCapPM);
