@@ -117,6 +117,9 @@
           <button class="nav-link data-tab" id="refrigerant-tab" data-bs-toggle="tab" data-bs-target="#refrigerant" type="button" role="tab" aria-controls="refrigerant" aria-selected="false">Refrigerant</button>
         </li>
         <li class="nav-item" role="presentation">
+          <button class="nav-link data-tab" id="gas-tab" data-bs-toggle="tab" data-bs-target="#gas" type="button" role="tab" aria-controls="gas" aria-selected="true">Gas</button>
+        </li>
+        <li class="nav-item" role="presentation">
           <button class="nav-link data-tab" id="airflow-tab" data-bs-toggle="tab" data-bs-target="#airflow" type="button" role="tab" aria-controls="airflow" aria-selected="true">Airflow</button>
         </li>
         <li class="nav-item" role="presentation">
@@ -208,6 +211,71 @@
             <div class="col-sm">
               <textarea  class="form-control model-val" id="airflowNotes" aria-describedby="airflowNotesHelp"></textarea>
               <div id="airflowNotesHelp" class="form-text">Notes</div>
+            </div>
+          </div>
+        </div>
+        <!-- End Airflow tab -->
+
+        <!-- Gas tab -->
+        <div class="tab-pane fade" id="gas" role="tabpanel" aria-labelledby="gas-tab">
+          <div class="row field-row">
+            <div class="col-sm-3">
+              <label for="inletGas" class="form-label">Inlet</label>
+            </div>
+            <div class="col-sm">
+              <div class="row">
+                <div class="col">
+                  <input type="number" step="any" class="form-control model-val" id="inletGas" aria-describedby="inletGasHelp">
+                  <div id="inletGasHelp" class="form-text">Inlet Pressure (" WC)</div>
+                </div>
+                <div class="col">
+                  <input type="number" step="any" class="form-control model-val" id="inletGasRated" aria-describedby="inletGasRatedHelp">
+                  <div id="inletGasRatedHelp" class="form-text">Inlet Target (" WC)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row field-row">
+            <div class="col-sm-3">
+              <label for="outletHiGas" class="form-label">Outlet (Hi)</label>
+            </div>
+            <div class="col-sm">
+              <div class="row">
+                <div class="col">
+                  <input type="number" step="any" class="form-control model-val" id="outletHiGas" aria-describedby="outletHiGasHelp">
+                  <div id="outletHiGasHelp" class="form-text">Outlet Pressure (" WC)</div>
+                </div>
+                <div class="col">
+                  <input type="number" step="any" class="form-control model-val" id="outletHiGasRated" aria-describedby="outletHiGasRatedHelp">
+                  <div id="outletHiGasRatedHelp" class="form-text">Outlet Target (" WC)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row field-row">
+            <div class="col-sm-3">
+              <label for="outletLowGas" class="form-label">Outlet (Low)</label>
+            </div>
+            <div class="col-sm">
+              <div class="row">
+                <div class="col">
+                  <input type="number" step="any" class="form-control model-val" id="outletLowGas" aria-describedby="outletLowGasHelp">
+                  <div id="outletLowGasHelp" class="form-text">Outlet Pressure (" WC)</div>
+                </div>
+                <div class="col">
+                  <input type="number" step="any" class="form-control model-val" id="outletLowGasRated" aria-describedby="outletLowGasRatedHelp">
+                  <div id="outletLowGasRatedHelp" class="form-text">Outlet Target (" WC)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row field-row">
+            <div class="col-sm-3">
+              <label for="gasNotes" class="form-label">Notes</label>
+            </div>
+            <div class="col-sm">
+              <textarea  class="form-control model-val" id="gasNotes" aria-describedby="gasNotesHelp"></textarea>
+              <div id="gasNotesHelp" class="form-text">Notes</div>
             </div>
           </div>
         </div>
