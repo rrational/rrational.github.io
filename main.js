@@ -145,6 +145,11 @@ function generateCondensorReport(component) {
 function generateFurnaceReport(component) {
     var reportText = "";
 
+    // GAS
+    reportText += reportFieldTarget("Inlet Gas", component.inletGas, component.inletGasRated, UNITS_INCHES_WATERCOLUMN);
+    reportText += reportFieldTarget("Outlet Gas (Hi)", component.outletHiGas, component.outletHiGasRated, UNITS_INCHES_WATERCOLUMN);
+    reportText += reportFieldTarget("Outlet Gas (Low)", component.outletLowGas, component.outletLowGasRated, UNITS_INCHES_WATERCOLUMN);
+    reportText += reportField("Gas Notes", component.gasNotes);
     // ELECTRICAL
     reportText += reportFieldRated("FLA", component.fla, component.flaRated, UNITS_AMPS);
     reportText += reportFieldRated("Inducer", component.inducer, component.inducerRated, UNITS_AMPS);
@@ -257,6 +262,7 @@ function showForm(id) {
     $('#refrigerant-tab').addClass('disabled');
     $('#electrical-tab').addClass('disabled');
     $('#capacitor-tab').addClass('disabled');
+    $('#gas-tab').addClass('disabled');
     $('#hermCapRow').addClass('invisible').hide();
     $('#fanCapRow').addClass('invisible').hide();
     $('#blowerCapRow').addClass('invisible').hide();
@@ -287,6 +293,7 @@ function showForm(id) {
         $('#airflow-tab').removeClass('disabled');
         $('#capacitor-tab').removeClass('disabled');
         $('#electrical-tab').removeClass('disabled');
+        $('#gas-tab').removeClass('disabled');
         $('#blowerCapRow').removeClass('invisible').show();
         $('#flameSensorRow').removeClass('invisible').show();
         $('#inducerRow').removeClass('invisible').show();
